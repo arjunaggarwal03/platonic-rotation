@@ -1,7 +1,7 @@
 # platonic-rotation
  
 ## introduction
-At the root of 3D rendering is the usage of basic matrix multiplication to convert three-dimensional points (x,y,z) into two-dimensional coordinates (x,y). Using OpenCV, I developed a visualization of the application of projection and rotation matrices on four platonic solids (cube, octahedron, isocadehron, & dodecahedron). Knowledge of matrix mulitplication is needed to understand the math below. =
+At the root of 3D rendering is the usage of basic matrix multiplication to convert three-dimensional points (x,y,z) into two-dimensional coordinates (x,y). Using OpenCV, I developed a visualization of the application of projection and rotation matrices on four platonic solids (cube, octahedron, isocadehron, & dodecahedron). Knowledge of matrix mulitplication is needed to understand the math below.
 
 ## the math
 
