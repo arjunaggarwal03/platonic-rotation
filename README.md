@@ -67,3 +67,8 @@ Next, to run the program, enter the following command:
 ```
 ./run
 ```
+## sources
+<ul>
+ <li>https://en.wikipedia.org/wiki/Rotation_matrix</li>
+ <li>https://en.wikipedia.org/wiki/3D_projection</li>
+</ul>
