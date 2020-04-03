@@ -76,4 +76,44 @@ int main(){
       drawPoint(image,Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2));
       pts.push_back(Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2));
     }
-  
+
+    //connect edges (isocahedron)
+    for(int i=0; i < 5; i++){
+      drawLine(image,pts[0],pts[(i+1)*2]);
+      drawLine(image,pts[1],pts[(i+1)*2+1]);
+    }
+    for(int j=0; j < 4; j++){
+      drawLine(image,pts[2+3*j],pts[7]);
+    }
+    drawLine(image,pts[2],pts[5]);
+    drawLine(image,pts[4],pts[3]);
+    drawLine(image,pts[4],pts[11]);
+    drawLine(image,pts[3],pts[11]);
+    drawLine(image,pts[6],pts[9]);
+    drawLine(image,pts[6],pts[3]);
+    drawLine(image,pts[3],pts[9]);
+    drawLine(image,pts[8],pts[11]);
+    drawLine(image,pts[10],pts[9]);
+    drawLine(image,pts[10],pts[5]);
+    drawLine(image,pts[5],pts[9]);
+    drawLine(image,pts[2],pts[8]);
+    drawLine(image,pts[2],pts[10]);
+    drawLine(image,pts[8],pts[4]);
+    drawLine(image,pts[10],pts[6]);
+    drawLine(image,pts[6],pts[4]);
+
+    imshow("Animation", image);
+    waitKey(1);
+    image = Mat::zeros(w, w, CV_8UC3); //resets image
+    angle += 0.02; //update angle
+    delay++;
+  }
+}
+
+void drawLine( Mat img, Point start, Point end ){
+  line( img,start,end,Scalar(255, 255, 0),2,8);
+}
+
+void drawPoint( Mat img, Point temp){
+  circle(img,temp,2,Scalar(255,158,179),18,8,0);
+}
