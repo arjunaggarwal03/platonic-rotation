@@ -76,6 +76,22 @@ int main(){
       drawPoint(image,Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2));
       pts.push_back(Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2));
     }
+
+    //connect edges (octahedron)
+    for(int i=0; i < 4; i++){
+      drawLine(image,pts[0],pts[i+2]);
+      drawLine(image,pts[1],pts[i+2]);
+    }
+    drawLine(image,pts[2],pts[4]);
+    drawLine(image,pts[3],pts[5]);
+    drawLine(image,pts[4],pts[3]);
+    drawLine(image,pts[5],pts[2]);
+
+    imshow("Animation", image);
+    waitKey(1);
+    image = Mat::zeros(w, w, CV_8UC3); //resets image
+    angle += 0.02; //update angle
+    delay++;
   }
 }
 
