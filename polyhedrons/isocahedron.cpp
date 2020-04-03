@@ -54,3 +54,26 @@ int main(){
 
   int delay = 0;
   
+  while (delay < 10000){
+    //rotation matrices
+    vector<vector<float>> rotationZ{{cos(angle),-sin(angle),0},{sin(angle),cos(angle),0},{0,0,1}};
+    vector<vector<float>> rotationX{{1,0,0},{0,cos(angle),-sin(angle)},{0,sin(angle),cos(angle)}};
+    vector<vector<float>> rotationY{{cos(angle),0,-sin(angle)},{0,1,0},{sin(angle),0,cos(angle)}};
+
+    vector<Point> pts;
+
+    for(int i=0; i < points.size(); i++){
+      vector<vector<float>> rotated = matmul(rotationY,points[i]);
+      rotated = matmul(rotationX,rotated);
+      rotated = matmul(rotationY,rotated);
+
+      float distance = 2;
+      float z = 1/(2 - rotated[2][0]);
+      cout << z << endl;
+      vector<vector<float>> projection{{z,0,0},{0,z,0}};
+
+      vector<vector<float>> projected2d = matmul(projection, rotated);
+      drawPoint(image,Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2));
+      pts.push_back(Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2));
+    }
+  
