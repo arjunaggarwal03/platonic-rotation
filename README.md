@@ -7,7 +7,8 @@ At the root of 3D rendering is the usage of basic matrix multiplication to conve
 Using OpenCV's `line(...)` and `circle(...)` built-in functions along with the `Mat` array class, I was able to create a visualization of the platonic solid rotation. Below, you can see what a isocadehron rotating looks like.
 
 <p align="center">
-<img src="https://media.giphy.com/media/VJC7bDvpjjdE4RWpBr/giphy.gif">
+<img src="https://media.giphy.com/media/f8c7qyFPRbzmIUBNEd/giphy.gif" height="300" width="300" hspace="20">
+<img src="https://media.giphy.com/media/M95Z9EnBiC3pczAsvt/giphy.gif" height="300" width="300" hspace="20">
 </p>
 
 ## the math
