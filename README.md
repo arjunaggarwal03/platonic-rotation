@@ -3,6 +3,13 @@
 ## introduction
 At the root of 3D rendering is the usage of basic matrix multiplication to convert three-dimensional points (x,y,z) into two-dimensional coordinates (x,y). Using OpenCV, I developed a visualization of the application of projection and rotation matrices on four platonic solids (cube, octahedron, isocadehron, & dodecahedron). Knowledge of matrix mulitplication is needed to understand the math below.
 
+## what it does
+Using OpenCV's `line(...)` and `circle(...)` built-in functions along with the `Mat` array class, I was able to create a visualization of the platonic solid rotation. Below, you can see what a isocadehron rotating looks like.
+
+<p align="center">
+<img src="https://media.giphy.com/media/VJC7bDvpjjdE4RWpBr/giphy.gif">
+</p>
+
 ## the math
 
 ### step one: rotation
