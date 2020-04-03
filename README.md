@@ -22,7 +22,15 @@ vector<vector<float>> rotationY{{cos(angle),0,-sin(angle)},{0,1,0},{sin(angle),0
 vector<vector<float>> rotationZ{{cos(angle),-sin(angle),0},{sin(angle),cos(angle),0},{0,0,1}};
 ```
 
-The order of the multiplication changes how the figure rotates in the animation. In my code, I first multiplied by the Y rotation matrix, then the X rotation matrix, and finally, the Z rotation matrix.
+The order of the multiplication changes how the figure rotates in the animation. In my code, I first multiplied by the Y rotation matrix, then the X rotation matrix, and finally, the Z rotation matrix as shown below:
+
+```C++
+vector<vector<float>> rotated = matmul(rotationY,points[i]); //rotates along Y axis
+
+rotated = matmul(rotationX,rotated); //then rotated along X axis
+
+rotated = matmul(rotationZ,rotated); //last rotated along Z axis
+```
 
 ### step two: orthographic projection
 Lastly, I used the following matrix expression to convert the 1x3 x-y-z coordinate matrix into two-dimensional coordinates.
