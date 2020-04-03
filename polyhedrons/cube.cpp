@@ -4,8 +4,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 
-#define w 1000
-#define gr 1.618034
+#define w 1000 //width of animation screen
 
 using namespace cv;
 using namespace std;
@@ -13,11 +12,13 @@ using namespace std;
 void drawLine( Mat img, Point start, Point end );
 void drawPoint(Mat img, Point temp);
 
+//converts 1x3 vector to 3x1 vector for matmul()
 vector<vector<float>> vecToMatrix(vector<float> b){
   vector<vector<float>> ret{{b[0]},{b[1]},{b[2]}};
   return ret;
 }
 
+//multiplication of two matrices
 vector<vector<float>> matmul(vector<vector<float>> a, vector<vector<float>> b){
   int colsA = a[0].size();
   int rowsA = a.size();
@@ -39,13 +40,14 @@ vector<vector<float>> matmul(vector<vector<float>> a, vector<vector<float>> b){
   return ret;
 }
 
+//helper method to handle 1D vectors
 vector<vector<float>> matmul(vector<vector<float>> a, vector<float> b){
   vector<vector<float>> m = vecToMatrix(b);
   return matmul(a,m);
 }
 
 int main(){
-  Mat image = Mat::zeros(w, w, CV_8UC3);
+  Mat image = Mat::zeros(w, w, CV_8UC3); //creates image matrix filled with (0,0,0) RGB pixels
 
   float angle = 0;
 
@@ -63,18 +65,15 @@ int main(){
     vector<Point> pts;
 
     for(int i=0; i < points.size(); i++){
-      vector<vector<float>> rotated = matmul(rotationY,points[i]);
-      rotated = matmul(rotationX,rotated);
-      rotated = matmul(rotationY,rotated);
+      vector<vector<float>> rotated = matmul(rotationY,points[i]); //rotates along Y axis
+      rotated = matmul(rotationX,rotated); //then rotated along X axis
+      rotated = matmul(rotationZ,rotated); //last rotated along Z axis
 
-      float distance = 2;
-      float z = 1/(2 - rotated[2][0]);
-      cout << z << endl;
-      vector<vector<float>> projection{{z,0,0},{0,z,0}};
+      vector<vector<float>> projection{{1,0,0},{0,1,0}}; //projection matrix to convert 3D points to 2D coordinates
 
       vector<vector<float>> projected2d = matmul(projection, rotated);
-      drawPoint(image,Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2));
-      pts.push_back(Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2));
+      drawPoint(image,Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2)); //draws point (look at drawPoint() below)
+      pts.push_back(Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2)); //pushes point to pts vector
     }
 
     //connect edges (cube)
@@ -92,10 +91,12 @@ int main(){
   }
 }
 
+//used opencv line(...) method
 void drawLine( Mat img, Point start, Point end ){
   line( img,start,end,Scalar(255, 255, 0),2,8);
 }
 
+//used opencv circle(...) method
 void drawPoint( Mat img, Point temp){
   circle(img,temp,2,Scalar(255,158,179),18,8,0);
 }

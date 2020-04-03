@@ -63,18 +63,15 @@ int main(){
     vector<Point> pts;
 
     for(int i=0; i < points.size(); i++){
-      vector<vector<float>> rotated = matmul(rotationY,points[i]);
-      rotated = matmul(rotationX,rotated);
-      rotated = matmul(rotationY,rotated);
+      vector<vector<float>> rotated = matmul(rotationY,points[i]); //rotates along Y axis
+      rotated = matmul(rotationX,rotated); //then rotated along X axis
+      rotated = matmul(rotationZ,rotated); //last rotated along Z axis
 
-      float distance = 2;
-      float z = 1/(2 - rotated[2][0]);
-      cout << z << endl;
-      vector<vector<float>> projection{{z,0,0},{0,z,0}};
+      vector<vector<float>> projection{{1,0,0},{0,1,0}}; //projection matrix to convert 3D points to 2D coordinates
 
       vector<vector<float>> projected2d = matmul(projection, rotated);
-      drawPoint(image,Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2));
-      pts.push_back(Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2));
+      drawPoint(image,Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2)); //draws point (look at drawPoint() below)
+      pts.push_back(Point(projected2d[0][0]+w/2,projected2d[1][0]+w/2)); //pushes point to pts vector
     }
 
     imshow("Animation", image);
@@ -85,10 +82,12 @@ int main(){
   }
 }
 
+//used opencv line(...) method
 void drawLine( Mat img, Point start, Point end ){
   line( img,start,end,Scalar(255, 255, 0),2,8);
 }
 
+//used opencv circle(...) method
 void drawPoint( Mat img, Point temp){
   circle(img,temp,2,Scalar(255,158,179),18,8,0);
 }
