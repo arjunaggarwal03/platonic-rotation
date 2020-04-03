@@ -57,7 +57,7 @@ vector<vector<float>> projection{{1,0,0},{0,1,0}};
 ## run my code (for mac/linux)
 In order to excute the code you must have OpenCV set up on your personal computer. Refer to [here](https://medium.com/@jaskaranvirdi/setting-up-opencv-and-c-development-environment-in-xcode-b6027728003) for OpenCV installation instructions. Make sure that your `opencv.pc` file is located in your `pkgconfig` folder.
 
-In order to compile the code on your machine, run the following command in terminal:
+In order to compile the code on your machine, `cd` into the cloned repo and run the following command in terminal:
 
 ```
 g++ $(pkg-config --cflags --libs opencv) -std=c++11  [name of file].cpp -o run
